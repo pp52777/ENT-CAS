@@ -35,6 +35,7 @@
       max-width: 600px;
       width: 100%;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
     }
     .cas__panel h1 {
       font-size: 20px;
@@ -45,6 +46,15 @@
     }
     input[type="radio"] {
       margin-right: 10px;
+    }
+    select {
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
     }
     fieldset {
       border: none;
@@ -89,7 +99,16 @@
   </header>
   <main>
     <div class="cas__panel">
-      <h1>Vous voulez vous connecter à l'ENT en tant que :</h1>
+      <h1>Choisissez votre système :</h1>
+      <select id="systemSelect" aria-label="Choisir un système">
+        <option value="" selected disabled>-- Sélectionnez --</option>
+        <option value="pronote">PRONOTE</option>
+        <option value="autre">Autre</option>
+      </select>
+    </div>
+
+    <div class="cas__panel" id="pronotePanel" style="display:none;">
+      <h1>Vous voulez vous connecter à PRONOTE en tant que :</h1>
       <form id="loginForm">
         <div class="cas__wayf-idp">
           <input type="radio" name="selection" id="idp-eleve" value="eleve" checked />
@@ -99,8 +118,8 @@
           <input type="radio" name="selection" id="idp-parent" value="parent" />
           <label class="form__label" for="idp-parent">Parent</label>
         </div>
-           <div class="cas__wayf-idp">
-          <input type="radio" name="selection" id="idp-enseignant" value="enseignant" />
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-enseign-agri" value="enseign-agri" />
           <label class="form__label" for="idp-enseign-agri">Enseignement agricole</label>
         </div>
         <div class="cas__wayf-idp">
@@ -147,7 +166,18 @@
   </main>
 
   <script>
+    const systemSelect = document.getElementById('systemSelect');
+    const pronotePanel = document.getElementById('pronotePanel');
     const form = document.getElementById('loginForm');
+
+    systemSelect.addEventListener('change', () => {
+      if(systemSelect.value === 'pronote') {
+        pronotePanel.style.display = 'block';
+      } else {
+        pronotePanel.style.display = 'none';
+      }
+    });
+
     form.addEventListener('submit', function(event) {
       event.preventDefault();
       const selection = form.selection.value;
@@ -160,9 +190,7 @@
         case 'parent':
           url = 'http://90.52.200.25:90/pronote/parent.html';
           break;
-           case 'enseign-agri':
-          url = 'http://90.52.200.25:90/pronote/professeur.html';
-          break;
+        case 'enseign-agri':
         case 'enseignant':
           url = 'http://90.52.200.25:90/pronote/professeur.html';
           break;
@@ -170,7 +198,8 @@
           url = 'http://90.52.200.25:90/pronote/viescolaire.html';
           break;
         case 'personnel-acad':
-          url = 'http://https://cas-collectivites.index-education.net/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3DCONSOLE_COLLECTIVITE%26redirect_uri%3Dhttps%253A%252F%252Fpronote-demo.index-education.net%252Foauthlogin%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520GLOBAL_SCOPE_COLLECTIVITE%2520offline_access%26code_challenge%3Dp71vOdSu5_llaTwKtNdFR-Mmhbln3zMFeGfo7NiiFHk%26code_challenge_method%3DS256%26state%3DOpenIdConnect.AuthenticationProperties%253DX13KuClj25ByLUAVxurkDOJ7F196DE6X-E3CFPXrShkbayBjlF38oHy6gb5GbgkjOqy596ArbCeo2VFbcg9mPd-Bjck88Y4BtWmJA3vfKmownnm7_mwWzhmYRcYpYmdKhSCaYwze2W-mIqdnyuouKNW3RhJ4n3v25WsDyXzUiCb9cinCKc54hMjekWtNzPL45V4VCW_G9rG2T7EVTy_wal8qi1aXvSbigQtnbihJ2mUqOjGxm5T3Mzp_5fMQuef2pAiPNP7_mC4kv309K4FR3IfuolZoQu_HFNer3YXe9kA%26nonce%3D638883491382532118.ZjFiMjBmZDktYjkyYi00YjA1LTllYTQtMGY0YmM3NzY4YWExNzAxZWUxMzAtODQxMy00ODgyLWJjMjMtM2ZjNTYxZjZiY2Iz%26x-client-SKU%3DID_NET472%26x-client-ver%3D6.19.0.0';
+          // Tu peux adapter cette URL si besoin
+          url = 'http://90.52.200.25:90/pronote/viescolaire.html';
           break;
         case 'autre':
           url = 'http://90.52.200.25:90/pronote/';
