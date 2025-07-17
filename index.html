@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bienvenue sur votre Environnement Numérique de Travail - Authentification</title>
   <style>
     body {
@@ -35,6 +35,7 @@
       max-width: 600px;
       width: 100%;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
     }
     .cas__panel h1 {
       font-size: 20px;
@@ -45,6 +46,15 @@
     }
     input[type="radio"] {
       margin-right: 10px;
+    }
+    select {
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
     }
     fieldset {
       border: none;
@@ -85,102 +95,119 @@
 <body>
   <header>
     <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo.png" alt="Logo ENT" />
-    <span style="font-size: 20px; margin-left: 10px;">Environnement Numérique de Travail du Collège CHAMPCLAUX </span>
+    <span style="font-size: 20px; margin-left: 10px;">Environnement Numérique de Travail du Collège CHAMPCLAUX</span>
   </header>
   <main>
     <div class="cas__panel">
       <h1>Choisissez votre système :</h1>
-      <form id="systemForm">
-        <select name="system" id="systemSelect" class="btn" style="width: 100%; margin-bottom: 20px;">
-          <option value="pronote">PRONOTE</option>
-          <option value="ent">ENT</option>
-        </select>
-      </form>
+      <select id="systemSelect" aria-label="Choisir un système">
+        <option value="" selected disabled>-- Sélectionnez --</option>
+        <option value="pronote">PRONOTE</option>
+        <option value="ent">ENT</option>
+      </select>
+    </div>
 
-      <hr class="divider" />
-
-      <div id="pronotePanel">
-        <h1>Vous voulez vous connecter en tant que :</h1>
-        <form id="loginFormPronote">
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="eleve" checked />
-            <label class="form__label">Élève</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="parent" />
-            <label class="form__label">Parent</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="enseign-agri" />
-            <label class="form__label">Enseignement agricole</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="enseignant" />
-            <label class="form__label">Enseignant</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="personnel-etab" />
-            <label class="form__label">Personnel non enseignant</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="personnel-acad" />
-            <label class="form__label">Personnel de collectivité</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="autre" />
-            <label class="form__label">Autre compte ou invité</label>
-          </div>
-          <div style="text-align: right; margin-top: 20px;">
-            <input type="submit" class="btn" value="Valider" />
-          </div>
-        </form>
-        <div style="margin-top: 20px;">
-          <button type="button" class="btn" onclick="window.location.href='http://edt-pronote.ddns.net:90/pronote/pageetablissement.html'">
-            Se connecter via la page établissement
-          </button>
+    <!-- Formulaire Pronote -->
+    <div class="cas__panel" id="pronotePanel" style="display:none;">
+      <h1>Vous voulez vous connecter à PRONOTE en tant que :</h1>
+      <form id="pronoteForm">
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-eleve" value="eleve" checked />
+          <label class="form__label" for="idp-eleve">Élève</label>
         </div>
-      </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-parent" value="parent" />
+          <label class="form__label" for="idp-parent">Parent</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-enseign-agri" value="enseign-agri" />
+          <label class="form__label" for="idp-enseign-agri">Enseignement agricole</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-enseignant" value="enseignant" />
+          <label class="form__label" for="idp-enseignant">Enseignant</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-personnel-etab" value="personnel-etab" />
+          <label class="form__label" for="idp-personnel-etab">Personnel non enseignant</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-personnel-acad" value="personnel-acad" />
+          <label class="form__label" for="idp-personnel-acad">Personnel de collectivité</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-autre" value="autre" />
+          <label class="form__label" for="idp-autre">Autre compte ou invité</label>
+        </div>
 
-      <div id="entPanel" style="display:none;">
-        <h1>Vous voulez vous connecter en tant que :</h1>
-        <form id="loginFormENT">
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="eleve" checked />
-            <label class="form__label">Élève</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="parent" />
-            <label class="form__label">Parent</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="enseign-agri" />
-            <label class="form__label">Enseignement agricole</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="enseignant" />
-            <label class="form__label">Enseignant</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="personnel-etab" />
-            <label class="form__label">Personnel non enseignant</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="personnel-acad" />
-            <label class="form__label">Personnel de collectivité</label>
-          </div>
-          <div class="cas__wayf-idp">
-            <input type="radio" name="selection" value="autre" />
-            <label class="form__label">Autre compte ou invité</label>
-          </div>
-          <div style="text-align: right; margin-top: 20px;">
-            <input type="submit" class="btn" value="Valider" />
-          </div>
-        </form>
-      </div>
+        <div style="text-align: right; margin-top: 20px;">
+          <input type="submit" class="btn" value="Valider" />
+          <div style="margin-top: 20px;">
+  <button type="button" class="btn" onclick="window.location.href='http://edt-pronote.ddns.net:90/pronote/pageetablissement.html'">
+    Se connecter via la page établissement
+  </button>
+</div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Formulaire ENT -->
+    <div class="cas__panel" id="entPanel" style="display:none;">
+      <h1>Vous voulez vous connecter à l'ENT en tant que :</h1>
+      <form id="entForm">
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-eleve" value="eleve" checked />
+          <label class="form__label" for="ent-eleve">Élève</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-parent" value="parent" />
+          <label class="form__label" for="ent-parent">Parent</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-enseign-agri" value="enseign-agri" />
+          <label class="form__label" for="ent-enseign-agri">Enseignement agricole</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-enseignant" value="enseignant" />
+          <label class="form__label" for="ent-enseignant">Enseignant</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-personnel-etab" value="personnel-etab" />
+          <label class="form__label" for="ent-personnel-etab">Personnel non enseignant</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-personnel-acad" value="personnel-acad" />
+          <label class="form__label" for="ent-personnel-acad">Personnel de collectivité</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="ent-autre" value="autre" />
+          <label class="form__label" for="ent-autre">Autre compte ou invité</label>
+        </div>
+
+        <div style="text-align: right; margin-top: 20px;">
+          <input type="submit" class="btn" value="Valider" />
+        </div>
+      </form>
     </div>
 
     <div class="cas__logos">
-      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_region_auvergne-rhone-alpes.png" alt="Région" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_region_auvergne-rhone-alpes.png" alt="Région Auvergne-Rhône-Alpes" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_01_ain.png" alt="Ain" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_03_allier.svg" alt="Allier" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_07_ardeche.svg" alt="Ardèche" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_15_cantal.png" alt="Cantal" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_38_isere.png" alt="Isère" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_42_loire.svg" alt="Loire" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_43_haute-loire.png" alt="Haute-Loire" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_63_puy-de-dome.png" alt="Puy-de-Dôme" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_69_rhone.png" alt="Rhône" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_73_savoie.png" alt="Savoie" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_74-haute-savoie.svg" alt="Haute-Savoie" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-clermont-ferrand.svg" alt="Académie de Clermont-Ferrand" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-grenoble.svg" alt="Académie de Grenoble" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-lyon.svg" alt="Académie de Lyon" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_draaf.svg" alt="DRAAF" />
     </div>
   </main>
 
@@ -188,61 +215,81 @@
     const systemSelect = document.getElementById('systemSelect');
     const pronotePanel = document.getElementById('pronotePanel');
     const entPanel = document.getElementById('entPanel');
+    
+    const pronoteForm = document.getElementById('pronoteForm');
+    const entForm = document.getElementById('entForm');
 
     systemSelect.addEventListener('change', () => {
-      const system = systemSelect.value;
-      if (system === 'pronote') {
+      if(systemSelect.value === 'pronote') {
         pronotePanel.style.display = 'block';
         entPanel.style.display = 'none';
-      } else {
+      } else if(systemSelect.value === 'ent') {
         pronotePanel.style.display = 'none';
         entPanel.style.display = 'block';
+      } else {
+        pronotePanel.style.display = 'none';
+        entPanel.style.display = 'none';
       }
     });
 
-    document.getElementById('loginFormPronote').addEventListener('submit', function(event) {
+    pronoteForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      const selection = this.selection.value;
+      const selection = pronoteForm.selection.value;
       let url = '';
+
       switch(selection) {
         case 'eleve':
-          url = 'http://90.52.200.25:90/pronote/eleve.html'; break;
+          url = 'http://90.52.200.25:90/pronote/eleve.html';
+          break;
         case 'parent':
-          url = 'http://90.52.200.25:90/pronote/parent.html'; break;
+          url = 'http://90.52.200.25:90/pronote/parent.html';
+          break;
         case 'enseign-agri':
         case 'enseignant':
-          url = 'http://90.52.200.25:90/pronote/professeur.html'; break;
+          url = 'http://90.52.200.25:90/pronote/professeur.html';
+          break;
         case 'personnel-etab':
-          url = 'http://90.52.200.25:90/pronote/viescolaire.html'; break;
+          url = 'http://90.52.200.25:90/pronote/viescolaire.html';
+          break;
         case 'personnel-acad':
+          url = 'http://90.52.200.25:90/pronote/viescolaire.html';
+          break;
         case 'autre':
-          url = 'http://90.52.200.25:90/pronote/'; break;
+          url = 'http://90.52.200.25:90/pronote/';
+          break;
         default:
           url = 'http://90.52.200.25:90/pronote/';
       }
       window.location.href = url;
     });
 
-    document.getElementById('loginFormENT').addEventListener('submit', function(event) {
+    entForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      const selection = this.selection.value;
+      const selection = entForm.selection.value;
       let url = '';
+
       switch(selection) {
         case 'eleve':
         case 'parent':
-          url = 'https://educonnect.education.gouv.fr/idp/profile/SAML2/POST/SSO?execution=e2s1'; break;
+          url = 'https://educonnect.education.gouv.fr/idp/profile/SAML2/POST/SSO?execution=e2s1';
+          break;
         case 'enseign-agri':
-          url = 'https://auth.educagri.fr/cas/login?service=https%3A%2F%2Fauth.educagri.fr%2Fidp%2FAuthn%2FExtCas%3Fconversation%3De1s1%26entityId%3Dsp-ent-rra-prod'; break;
+          url = 'https://auth.educagri.fr/cas/login?service=https%3A%2F%2Fauth.educagri.fr%2Fidp%2FAuthn%2FExtCas%3Fconversation%3De1s1%26entityId%3Dsp-ent-rra-prod';
+          break;
         case 'enseignant':
-          url = 'https://login.ac-clermont.fr/idp/profile/oidc/authorize?execution=e1s2'; break;
+          url = 'https://login.ac-clermont.fr/idp/profile/oidc/authorize?execution=e1s2';
+          break;
         case 'personnel-etab':
-          url = 'https://login.ac-clermont.fr/idp/profile/oidc/authorize?execution=e2s1'; break;
+          url = 'https://login.ac-clermont.fr/idp/profile/oidc/authorize?execution=e2s1';
+          break;
         case 'personnel-acad':
-          url = 'https://cas.ent.auvergnerhonealpes.fr/login?selection=puy-de-dome&service=https%3A%2F%2Fwww.ent.auvergnerhonealpes.fr%2Fsg.do%3FPROC%3DPAGE_ACCUEIL&submit=Valider'; break;
+          url = 'https://cas.ent.auvergnerhonealpes.fr/login?selection=puy-de-dome&service=https%3A%2F%2Fwww.ent.auvergnerhonealpes.fr%2Fsg.do%3FPROC%3DPAGE_ACCUEIL&submit=Valider';
+          break;
         case 'autre':
-          url = 'https://cas.ent.auvergnerhonealpes.fr/login?selection=ENT&service=https%3A%2F%2Fwww.ent.auvergnerhonealpes.fr%2Fsg.do%3FPROC%3DPAGE_ACCUEIL&submit=Valider'; break;
+          url = 'https://cas.ent.auvergnerhonealpes.fr/login?selection=ENT&service=https%3A%2F%2Fwww.ent.auvergnerhonealpes.fr%2Fsg.do%3FPROC%3DPAGE_ACCUEIL&submit=Valider';
+          break;
         default:
-          url = 'https://www.ent.auvergnerhonealpes.fr';
+          url = 'https://educonnect.education.gouv.fr/idp/profile/SAML2/POST/SSO?execution=e2s1';
       }
       window.location.href = url;
     });
