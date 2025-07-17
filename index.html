@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenue sur votre Environnement Numérique de Travail - Authentification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #003366;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 10px;
+    }
+    .cas__panel {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .cas__panel h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .form__label {
+      margin-left: 8px;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    fieldset {
+      border: none;
+      padding: 0;
+    }
+    .btn {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #005599;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: #ccc;
+      margin: 20px 0;
+    }
+    .cas__wayf-idp {
+      margin-bottom: 12px;
+    }
+    .cas__logos {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .cas__logos img {
+      height: 50px;
+      margin: 5px 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo.png" alt="Logo ENT" />
+    <span style="font-size: 20px; margin-left: 10px;">Environnement Numérique de Travail</span>
+  </header>
+  <main>
+    <div class="cas__panel">
+      <h1>Vous voulez vous connecter à l'ENT en tant que :</h1>
+      <form id="loginForm">
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-eleve" value="eleve" checked />
+          <label class="form__label" for="idp-eleve">Élève</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-parent" value="parent" />
+          <label class="form__label" for="idp-parent">Parent</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-enseignant" value="enseignant" />
+          <label class="form__label" for="idp-enseignant">Enseignant</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-personnel-etab" value="personnel-etab" />
+          <label class="form__label" for="idp-personnel-etab">Personnel de l'établissement</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-personnel-acad" value="personnel-acad" />
+          <label class="form__label" for="idp-personnel-acad">Personnel de l'académie</label>
+        </div>
+        <div class="cas__wayf-idp">
+          <input type="radio" name="selection" id="idp-autre" value="autre" />
+          <label class="form__label" for="idp-autre">Autre utilisateur</label>
+        </div>
+
+        <div style="text-align: right; margin-top: 20px;">
+          <input type="submit" class="btn" value="Valider" />
+        </div>
+      </form>
+    </div>
+
+    <div class="cas__logos">
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_region_auvergne-rhone-alpes.png" alt="Région Auvergne-Rhône-Alpes" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_01_ain.png" alt="Ain" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_03_allier.svg" alt="Allier" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_07_ardeche.svg" alt="Ardèche" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_15_cantal.png" alt="Cantal" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_38_isere.png" alt="Isère" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_42_loire.svg" alt="Loire" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_43_haute-loire.png" alt="Haute-Loire" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_63_puy-de-dome.png" alt="Puy-de-Dôme" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_69_rhone.png" alt="Rhône" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_73_savoie.png" alt="Savoie" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_74-haute-savoie.svg" alt="Haute-Savoie" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-clermont-ferrand.svg" alt="Académie de Clermont-Ferrand" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-grenoble.svg" alt="Académie de Grenoble" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_academie-lyon.svg" alt="Académie de Lyon" />
+      <img src="https://cas.ent.auvergnerhonealpes.fr/static/logo_draaf.svg" alt="DRAAF" />
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const selection = form.selection.value;
+      let url = '';
+
+      switch(selection) {
+        case 'eleve':
+          url = 'http://joaquim1508:85/pronote/eleve.html';
+          break;
+        case 'parent':
+          url = 'http://joaquim1508:85/pronote/parent.html';
+          break;
+        case 'enseignant':
+          url = 'http://joaquim1508:85/pronote/professeur.html';
+          break;
+        case 'personnel-etab':
+          url = 'http://joaquim1508:85/pronote/viescolaire.html';
+          break;
+        case 'personnel-acad':
+          url = 'http://joaquim1508:85/pronote/';
+          break;
+        case 'autre':
+          url = 'http://joaquim1508:85/pronote/';
+          break;
+        default:
+          url = 'http://joaquim1508:85/pronote/';
+      }
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>
